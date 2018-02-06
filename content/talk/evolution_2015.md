@@ -1,21 +1,53 @@
 +++
+title = "Death and taxa: time-invariant differences in mammal species duration"
+date = "2015-06-26"
+draft = false
+
+# Talk start and end times.
+#   End time can optionally be hidden by prefixing the line with `#`.
+time_start = 2018-02-05T16:56:54-08:00
+time_end = 2018-02-05T16:56:54-08:00
+
+# Abstract and optional shortened version.
 abstract = ""
 abstract_short = ""
-date = "2015-06-26"
+
+# Name of event and optional event URL.
 event = "Evolution"
 event_url = ""
-highlight = true
+
+# Location of event.
 location = ""
-math = false
+
+# Is this a selected talk? (true/false)
 selected = false
-title = "Death and taxa: time-invariant differences in mammal species duration"
+
+# Projects (optional).
+#   Associate this talk with one or more of your projects.
+#   Simply enter the filename (excluding '.md') of your project file in `content/project/`.
+#   E.g. `projects = ["deep-learning"]` references `content/project/deep-learning.md`.
+projects = []
+
+# Tags (optional).
+#   Set `tags = []` for no tags, or use the form `tags = ["A Tag", "Another Tag"]` for one or more tags.
+tags = []
+
+# Links (optional).
 url_pdf = ""
 url_slides = ""
 url_video = "https://www.youtube.com/watch?v=bgKbctUJGuI"
+url_code = ""
 
+# Does the content use math formatting?
+math = false
+
+# Does the content use source code highlighting?
+highlight = true
+
+# Featured image
+# Place your image in the `static/img/` folder and reference its filename below, e.g. `image = "example.jpg"`.
 [header]
-  caption = ""
-  image = ""
+image = ""
+caption = ""
 
 +++
-
