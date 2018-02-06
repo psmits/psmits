@@ -3,14 +3,14 @@
 
 # The URL of your website.
 # End your URL with a `/` trailing slash, e.g. `https://example.com/`.
-baseurl = "/"
+baseurl = "https://psmits.github.io/"
 
 # Title of your site
-title = "Academic"
+title = "Peter D Smits"
 
 # Your copyright notice - appears in site footer.
 # To display a copyright symbol, type `&copy;`.
-copyright = "&copy; 2018"
+copyright = "&copy; 2018 Peter D Smits"
 
 theme = "academic"
 enableEmoji = true
@@ -20,7 +20,7 @@ preserveTaxonomyNames = true
 paginate = 10
 
 # Enable comments by entering your Disqus shortname
-disqusShortname = ""
+disqusShortname = "peterdavidsmits"
 
 # Enable analytics by entering your Google Analytics tracking ID
 googleAnalytics = ""
@@ -50,20 +50,22 @@ defaultContentLanguageInSubdir = false
   font = "default"
 
   # Your details.
-  name = "Lena Smith"
-  role = "Professor of Artificial Intelligence"
+  name = "Peter D Smits"
+  role = "Post-doctoral Researcher, Integrative Biology"
+
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-  organizations = [ { name = "Stanford University", url = "" } ]
+  organization = "University of California -- Berkeley"
+  organization_url = ""
 
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
-  avatar = "portrait.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
-  email = "test@example.org"
-  address = "Building 1 Room 1, Stanford University, California, 90210, USA"
-  office_hours = "Monday 10:00 to 13:00 or email for appointment"
-  phone = "888 888 88 88"
-  skype = "echo123"
+  avatar = "peter.jpg"
+  email = "peterdavidsmits@gmail.com"
+  address = "TBA"
+  office_hours = "email for appointment"
+  phone = ""
+  skype = ""
   telegram = ""
 
   # Enable Keybase in Contact widget by entering your keybase.io username.
@@ -165,12 +167,10 @@ defaultContentLanguageInSubdir = false
   #   translated.
   publication_types = [
     'Uncategorized',  # 0
-    'Conference paper',  # 1
-    'Journal article',  # 2
-    'Manuscript',  # 3
-    'Report',  # 4
-    'Book',  # 5
-    'Book section'  # 6
+    'Journal',  # 1
+    'Book chapter ',  # 2
+    'Book',  # 3
+    'Thesis',  # 4
   ]
 
   # Configuration of talk pages.
@@ -213,26 +213,47 @@ defaultContentLanguageInSubdir = false
   #   google-scholar, arxiv, orcid, researchgate, mendeley
   #
   #   Full list: https://jpswalsh.github.io/academicons/
-
   [[params.social]]
     icon = "envelope"
     icon_pack = "fa"
-    link = "mailto:test@example.org"
-
-  [[params.social]]
-    icon = "twitter"
-    icon_pack = "fa"
-    link = "//twitter.com/GeorgeCushen"
+    link = "mailto:peterdavidsmits@gmail.com"
 
   [[params.social]]
     icon = "google-scholar"
     icon_pack = "ai"
-    link = "https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ"
+    link = "https://scholar.google.com/citations?user=A5IZRrQAAAAJ&hl"
 
   [[params.social]]
     icon = "github"
     icon_pack = "fa"
-    link = "//github.com/gcushen"
+    link = "//github.com/psmits"
+
+  [[params.social]]
+    icon = "twitter"
+    icon_pack = "fa"
+    link = "https://twitter.com/PeterDSmits"
+  
+  [[params.social]]
+    icon = "linkedin"
+    icon_pack = "fa"
+    link = "https://www.linkedin.com/in/pdsmits/"
+  
+  [[params.social]]
+    icon = "orcid"
+    icon_pack = "ai"
+    link = "http://orcid.org/0000-0003-4074-1447"
+
+  [[params.social]]
+    icon = "google-plus"
+    icon_pack = "fa"
+    link = "https://plus.google.com/+PeterSmitsRPG"
+
+
+# Navigation Links
+#   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
+#     desired widget in your `content/home/` folder.
+#   The weight parameter defines the order that the links will appear in.
+
 
 
 # Navigation Links
