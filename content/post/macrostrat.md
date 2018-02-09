@@ -1,6 +1,6 @@
 +++
 title = "Downloading unit data from Macrostrat and looking at it"
-date = 2018-02-07
+date = 2018-02-06
 draft = false
 
 # Tags and categories
