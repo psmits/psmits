@@ -78,7 +78,3 @@ ggsave(plot = td, filename = 'unit_div_time.png', height = 5.5, width = 6)
 musthavefossil2 <- filter(nfossil, unitdiv > 0)
 ntd <- td %+% musthavefossil2
 ggsave(plot = ntd, filename = 'unit_div_time_gr0.png', height = 5.5, width = 6)
-
-
-# taxonomic composition
-# look at a few units
