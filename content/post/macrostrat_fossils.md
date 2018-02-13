@@ -1,6 +1,6 @@
 +++
 title = "Inspecting fossil diveristy in Macrostrat units"
-date = 2018-02-08T12:28:43-08:00
+date = 2018-02-12
 draft = false
 
 # Tags and categories
@@ -21,7 +21,7 @@ preview = false
 +++
 
 
-In this post I'm going to dive deeper in to [Macrostrat](https://macrostrat.org) and start looking at genus diversity of geological units; this is the first follow-up on my [previous post][{{< relref "post/macrostrat.md" >}}]. Like before, the code used to generate all the figures etc. is available [here]().
+In this post I'm going to dive deeper in to [Macrostrat](https://macrostrat.org) and start looking at genus diversity of geological units; this is the first follow-up on my [previous post][{{< relref "post/macrostrat.md" >}}]. Like before, the code used to generate all the figures etc. is available [here](https://github.com/psmits/psmits/blob/master/static/code/macro_fossils.r).
 
 Our initial data call is exactly the same as my previous post; I'm looking for geological units with Permian sediments: https://macrostrat.org/api/v2/units?interval_name=Permian&response=long&format=csv. Unfortunately this API call does not return useful information about what fossils are found in the geologic unit, only how many. Fortunately, this is pretty easy to overcome.
 
@@ -59,13 +59,13 @@ Macrostrat units have lots of data associated with them, including duration and 
 
 ![log area vs diversity](/img/unit_div_logarea.png)
 
-So, there doesn't appear to be that much of a obvious relationship between either unit duration or area and unit diversity. However, there are a lot of units with 0 fossil observed which may be obscuring an actual pattern. Let's try again but this time only with the units that bear fossils (super easy to do in ggplot).
+So, there doesn't appear to be a linear relationship between either unit duration or area and unit diversity; perhaps any model of this data should strongly consider possible non-linear effects of covariates on unit diversity. However, there are a lot of units with 0 fossil observed which may be obscuring an actual pattern. Let's try again but this time only with the units that bear fossils (super easy to do in ggplot).
 
 ![log duration vs diversity, no 0s](/img/unit_div_age_gr0.png)
 
 ![log area vs diversity, no 0s](/img/unit_div_area_gr0.png)
 
-That appears to add something to the discussion. One new concern is that the measure of diversity is based on ALL genera identified to that unit; this includes everything from bivalves to brachiopods to crinoids and beyond. Perhaps in a future analysis I'll break down these explorations by taxonomic group (stay tuned).
+That appears to add something to the discussion, and the possibility of a non-linear between these covariates and unit diversity appears definitely worth considering. One new concern is that the measure of diversity is based on ALL genera identified to that unit; this includes everything from bivalves to brachiopods to crinoids and beyond. Perhaps in a future analysis I'll break down these explorations by taxonomic group (stay tuned).
 
 Finally, I have two more plots before I sign off on this showcase: unit diversity over time. Plotting each geological unit at its midpoint we can get an idea if average unit diversity has any systematic change over time. Additionally, we can see if there are time periods with scrappy records. I've made the plot both with and without units bearing 0 fossils.
 
@@ -73,6 +73,6 @@ Finally, I have two more plots before I sign off on this showcase: unit diversit
 
 ![time vs diversity, no 0s](/img/unit_div_time_gr0.png)
 
-Stay tuned for more explorations of Macrostrat. If you're interested in looking at the code used to generate these plots, check [here]().
+Stay tuned for more explorations of Macrostrat. If you're interested in looking at the code used to generate these plots, check [here](https://github.com/psmits/psmits/blob/master/static/code/macro_fossils.r).
 
 

@@ -38,8 +38,8 @@ fossil$unitdiv[match(unitdiv$unit_id, cypher[, 2])] <- unitdiv$count
 fossil <- mutate(fossil, length = abs(t_age - b_age))
 
 # basic plot of duration X diversity
-fd <- ggplot(fossil, aes(x = length, y = unitdiv)) + geom_count()
-fd <- fd + geom_smooth(se = FALSE)
+fd <- ggplot(fossil, aes(x = length, y = unitdiv)) + geom_point(alpha = 0.5)
+fd <- fd + geom_smooth(se = FALSE, alpha = 0.5)
 fd <- fd + labs(x = 'duration (My)', y = 'unit diveristy')
 ggsave(plot = fd, filename = 'unit_div_age.png', height = 5.5, width = 6)
 
@@ -50,9 +50,9 @@ ggsave(plot = fd, filename = 'unit_div_logage.png', height = 5.5, width = 6)
 
 # how about areal extent and diveristy
 fossil$col_area <- strat$col_area[match(fossil$unit_id, strat$unit_id)]
-ad <- ggplot(fossil, aes(x = col_area, unitdiv)) + geom_count()
+ad <- ggplot(fossil, aes(x = col_area, unitdiv)) + geom_point(alpha = 0.5)
 ad <- ad + coord_trans(x = 'log')
-ad <- ad + geom_smooth(se = FALSE)
+ad <- ad + geom_smooth(se = FALSE, alpha = 0.5)
 ad <- ad + labs(x = 'column area', y = 'unit diversity')
 ggsave(plot = ad, filename = 'unit_div_logarea.png', height = 5.5, width = 6)
 
@@ -70,9 +70,10 @@ ggsave(plot = nad, filename = 'unit_div_area_gr0.png', height = 5.5, width = 6)
 fossil$m_age <- apply(cbind(fossil$t_age, fossil$b_age), 1, mean)
 nfossil <- filter(fossil, m_age <= permian[1], m_age > permian[2])
 # unit diversity through time, plotted at midpoints
-td <- ggplot(nfossil, aes(x = m_age, y = unitdiv)) + geom_count()
-td <- td + geom_smooth(se = FALSE)
+td <- ggplot(nfossil, aes(x = m_age, y = unitdiv)) + geom_point(alpha = 0.5)
+td <- td + geom_smooth(se = FALSE, alpha = 0.5)
 td <- td + labs(x = 'Time (Mya)', y = 'unit diveristy')
+td <- td + scale_x_reverse()
 ggsave(plot = td, filename = 'unit_div_time.png', height = 5.5, width = 6)
 
 musthavefossil2 <- filter(nfossil, unitdiv > 0)
