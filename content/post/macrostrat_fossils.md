@@ -21,7 +21,7 @@ preview = false
 +++
 
 
-In this post I'm going to dive deeper in to [Macrostrat](https://macrostrat.org) and start looking at genus diversity of geological units; this is the first follow-up on my [previous post][{{< relref "post/macrostrat.md" >}}]. Like before, the code used to generate all the figures etc. is available [here](https://github.com/psmits/psmits/blob/master/static/code/macro_fossils.r).
+In this post I'm going to dive deeper in to [Macrostrat](https://macrostrat.org) and start looking at genus diversity of geological units; this is the first follow-up on my [previous post]({{< relref "post/macrostrat.md" >}}). Like before, the code used to generate all the figures etc. is available [here](https://github.com/psmits/psmits/blob/master/static/code/macro_fossils.r).
 
 Our initial data call is exactly the same as my previous post; I'm looking for geological units with Permian sediments: https://macrostrat.org/api/v2/units?interval_name=Permian&response=long&format=csv. Unfortunately this API call does not return useful information about what fossils are found in the geologic unit, only how many. Fortunately, this is pretty easy to overcome.
 
