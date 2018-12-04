@@ -1,0 +1,91 @@
+---
+title: "Extracting Macrostrat polygons"
+date: '2018-12-04'
+slug: macrostrat-polygon
+categories: []
+tags: ["academic"]
+header:
+  caption: ''
+  image: ''
+---
+
+[Macrostrat](https://macrostrat.org/) is a data service I've written [about before]({{< relref "/post/macrostrat.md" >}}). Today I'm going to explaining how to get the fancy geological unit polygons you see when go to their [interactive](https://macrostrat.org/map/#/z=1.5/x=16/y=23/bedrock/lines/) [geological maps](https://macrostrat.org/burwell/#3/40.80/-94.10). This is not covered or documented in the [Macrostrat API](https://macrostrat.org/api/v2/) -- I only figured it out through snooping, determination, and careful skimming of the [sift](https://github.com/UW-Macrostrat/sift) source code.
+
+The goal of this "how-to" is to get the map for at least one geological unit. But how do we find this?
+
+The Macrostrat API is not very...expansive. This makes interacting with the API frequently difficult. 
+
+The information we're looking for are associated with the geologic map units. From the API landing page, we'd expect our map information to be somewhere along the `/geologic_units` path. From the landing page there appear to be only three paths forward `/geologic_units/gmna`, `/geologic_units/gmus/`, and `/geologic_units/map`. That last one seems right, right?
+
+Navigating to the [`/geologic_units/map` page](https://macrostrat.org/api/v2/geologic_units/map) gives us some breadcrumbs for our journey.
+
+To get a map back from the Macrostrat API we need to provide some information about what geological units we want. There are seven parameter options: scale, map_id, lat, lng, strat_name_id, unit_id, and format. If we use latitude and longitude coordinates when calling for maps, the response includes all geological map units that interset with that point. If we use a `map_id` or `unit_id`, we'll get back one or more maps -- you can ask for multiple maps using a comma seperated string. Something that is extremely important is the format option -- depending on what option you use, you may or may not get the map coordinates. To guarentee map information, I use the `geojson` format.
+
+Additionally, to make this all easier, we're going to use the `geojsonsf` package to read in our data. It just makes everything easier.
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(magrittr)
+library(jsonlite)
+library(sf)
+library(geojsonsf)
+
+call <-'https://macrostrat.org/api/v2/units?interval_name=Miocene&response=long&format=csv'
+unit_data <- read_csv(call) %>%
+  group_by(col_id) %>%
+  mutate(t_age_max = max(t_age),
+         b_age_max = max(b_age)) %>%
+  ungroup() %>%
+  filter(t_age_max > 22 & b_age_max < 33,
+         clng < 0,
+         abs(abs(clat) - 37) < 10,
+         abs(abs(clng) - 122) < 10)    # nearish to SF
+
+unit_id <- unit_data %>%
+  pull(unit_id) %>%
+  unique(.) %>%
+  sort(.) %>%
+  paste0(., collapse = ',')
+
+# write an API call
+call <- paste0('https://macrostrat.org/api/v2/geologic_units/map?unit_id=', unit_id, '&format=geojson_bare')
+data <- geojson_sf(call)               # convert the Macrostrat data into an sf object
+glimpse(data)
+```
+
+The above code chunk first makes an API call to the Macrostract database. This response data has each geological unit as a row and tons of information on each unit. Importantly, there are multiple geological units per Macrostrat column id -- it is the columns which have map properties, not the units themselves.
+
+Here is an explination of what is displayed when you `print(...)` an sf object.
+
+![](/img/sf_xfig.png)
+
+
+sf objects are very powerful and there are many analyses we can do with them. The simplest question we can ask is "what the area of each geological map?"
+```{r}
+data %>%
+  mutate(area = as.numeric(st_area(.)),
+         area_log = log(area),
+         m_age = (t_age + b_age) / 2) %>%
+  ggplot(.) +
+  geom_histogram(mapping = aes(x = area_log)) +
+  NULL
+```
+
+Because our data is an `sf` object, it is easy to slice and dice our data and try to get a better handle on it. We can also plot our sf object. I'll use `ggplot2` because I like it. A neat bit of information is the color vector -- this is a vector of suggested hex codes to color your polygons based on their lithologies. You can also see the `map_id`-s -- our call returned four maps. The other fields are described in the [Macrostrat API](https://macrostrat.org/api/v2/geologic_units/map). I'll take advantage of that when plotting the units
+```{r}
+# let's only plot one of the units
+# decrease the number of units
+temp <- data %>%
+  filter(as.numeric(st_area(.)) < 2000)
+
+pal <- data$color
+ggplot() +
+  geom_sf(data = data, mapping = aes(fill = as.factor(map_id))) +
+  scale_fill_manual(values = pal, name = 'Geological Map ID') +
+  theme_bw() +
+  theme(legend.position = 'none') +
+  NULL
+```
+
+Because our map data is an sf object, it is very easy to take advantage of the whole suite of spatial analysis tools avaliable. For more information see the [sf documentation](https://r-spatial.github.io/sf/index.html).

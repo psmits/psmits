@@ -52,4 +52,3 @@ caption = ""
 
 +++
 
-{{< speakerdeck 775b65c779554d4bbef34831fa7bc362 >}}
