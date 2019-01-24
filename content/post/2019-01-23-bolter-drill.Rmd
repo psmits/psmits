@@ -47,20 +47,20 @@ Let's begin by looking at how well a 5-man squad of marines does against another
 
 ```{r bolters}
 n <- 1000
-codex_24 <- replicate(n, to_attack(n= 5, skill = 3)) %>%
+codex_24 <- replicate(n, to_attack(n = (1 * 5), skill = 3)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
-codex_12 <- replicate(n, to_attack(n= 10, skill = 3)) %>%
+codex_12 <- replicate(n, to_attack(n = 2 * (1 * 5), skill = 3)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
 
-beta_24 <- replicate(n, to_attack(n= 10, skill = 3)) %>%
+beta_24 <- replicate(n, to_attack(n = 2 * (1 * 5), skill = 3)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
-beta_12 <- replicate(n, to_attack(n= 20, skill = 3)) %>%
+beta_12 <- replicate(n, to_attack(n = 2 * (1 * 5), skill = 3)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
@@ -97,20 +97,20 @@ What's even better is that if DA Infantry can re-roll to-hit rolls of 1 if they 
 
 ```{r reroll}
 n <- 1000
-codex_24 <- replicate(n, to_attack(n= 5, skill = 3, reroll = 1)) %>%
+codex_24 <- replicate(n, to_attack(n = (1 * 5), skill = 3, reroll = 1)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
-codex_12 <- replicate(n, to_attack(n= 10, skill = 3, reroll = 1)) %>%
+codex_12 <- replicate(n, to_attack(n = 2 * (1 * 5), skill = 3, reroll = 1)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
 
-beta_24 <- replicate(n, to_attack(n= 10, skill = 3, reroll = 1)) %>%
+beta_24 <- replicate(n, to_attack(n = 2 * (1 * 5), skill = 3, reroll = 1)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
-beta_12 <- replicate(n, to_attack(n= 20, skill = 3, reroll = 1)) %>%
+beta_12 <- replicate(n, to_attack(n = 2 * (1 * 5), skill = 3, reroll = 1)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
@@ -145,20 +145,20 @@ And, just for fun, how about Deathwing Terminators firing at MEQs.
 ```{r terminator}
 
 n <- 1000
-codex_24 <- replicate(n, to_attack(n= 4 * 5, skill = 2)) %>%
+codex_24 <- replicate(n, to_attack(n = (2 * 5), skill = 2)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
-codex_12 <- replicate(n, to_attack(n= 2 * (4 * 5), skill = 2)) %>%
+codex_12 <- replicate(n, to_attack(n = 2 * (2 * 5), skill = 2)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
 
-beta_24 <- replicate(n, to_attack(n= 8 * 5, skill = 2)) %>%
+beta_24 <- replicate(n, to_attack(n = 2 * (2 * 5), skill = 2)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
-beta_12 <- replicate(n, to_attack(n= 2 * (8 * 5), skill = 2)) %>%
+beta_12 <- replicate(n, to_attack(n = 2 * (2 * 5), skill = 2)) %>%
   map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
   map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
 
