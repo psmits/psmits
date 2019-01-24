@@ -90,7 +90,7 @@ results %>%
 ```
 
 
-Under the Old Rules there was almost no chance for a squad of Tactical Marines to one-shot 5 MEQs. With the new Beta rules, at less than 12 inches there is a much improved chance of handing out 5 wounds against MEQs.
+Under the Old Rules there was almost no chance for a squad of Tactical Marines to one-shot 5 MEQs. With the new Beta rules, tacticals have a much better damage output from where they should be -- far away from assault units.
 
 
 What's even better is that if DA Infantry can re-roll to-hit rolls of 1 if they stand still. Let's take a look at that.
@@ -185,4 +185,4 @@ results %>%
 
 ```
 
-Terminators totally destroy MEQs with the new Beta rules, it is crazy!
+Terminators totally destroy MEQs at all ranges with the new Beta rules, it is crazy!
