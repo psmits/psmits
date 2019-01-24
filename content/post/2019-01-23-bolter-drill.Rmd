@@ -1,0 +1,188 @@
+---
+title: "mathhammr and Bolter Discipline Beta rule"
+author: ~
+date: '2019-01-23'
+slug: bolter-drill
+categories: []
+tags: ["fun"]
+header:
+  caption: ''
+  image: ''
+  preview: yes
+---
+
+
+In my spare time I play Warhammer 40k, a game that involves rolling a lot of six-sided dice. My largest army are the Dark Angels, a major chapter of space marines.
+
+Because I've wanted to grow my R skills, I finally wrote my first R package [`mathhammr`](https://github.com/psmits/mathhammr). This lightweight package is a collection functions for simulating collections of dice rolls.
+
+The recently released Bolter Discipline beta rule for 40k is the perfect opportunity to demonstrate the package. 
+
+![](/img/bolter_disc.jpg)
+
+The Bolter Discipline rule DOUBLES the amount of shots from **bolt** weapons! This is huge for the Dark Angels, synergizing very well with their chapter tactic and giving a huge boost to the Deathwing and Ravenwing.
+
+
+```{r install_package, message=FALSE}
+if (!require(devtools)) {
+    install.packages('devtools')
+}
+devtools::install_github('psmits/mathhammr')
+```
+
+```{r load_package, message=FALSE}
+library(dplyr)
+library(magrittr)
+library(purrr)
+library(tidyr)
+library(forcats)
+library(ggplot2)
+library(mathhammr)
+```
+
+
+The first thing I want to demonstrate is the effect of Bolter Discipline on my Tactical Marines.
+
+Let's begin by looking at how well a 5-man squad of marines does against another squad of marines before and after Bolter Discipline, at 24 inches and at 12 inches. Let's do this by generating 1000 simulated series.
+
+```{r bolters}
+n <- 1000
+codex_24 <- replicate(n, to_attack(n= 5, skill = 3)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+codex_12 <- replicate(n, to_attack(n= 10, skill = 3)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+
+beta_24 <- replicate(n, to_attack(n= 10, skill = 3)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+beta_12 <- replicate(n, to_attack(n= 20, skill = 3)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+
+results <- tibble(
+  codex_24,
+  codex_12,
+  beta_24,
+  beta_12
+  )
+
+results %>%
+  gather(key = 'key', value = 'value') %>%
+  tidyr::separate(key, c('type', 'range'), '_') %>%
+  mutate(type = case_when(type == 'codex' ~ 'Old rules',
+                          type == 'beta' ~ 'Beta rules'),
+         type = fct_rev(type),
+         range = case_when(range == '12' ~ '<= 12 Inches',
+                           range == '24' ~ '<= 24 Inches')) %>%
+  ggplot() +
+  geom_bar(aes(x = value, fill = type)) +
+  facet_grid(type ~ range) +
+  labs(x = 'Wounds Inflicted by 5 MEQs at MEQ target', y = 'Count') +
+  theme(legend.position = 'none') +
+  NULL
+
+```
+
+
+Under the Old Rules there was almost no chance for a squad of Tactical Marines to one-shot 5 MEQs. With the new Beta rules, at less than 12 inches there is a much improved chance of handing out 5 wounds against MEQs.
+
+
+What's even better is that if DA Infantry can re-roll to-hit rolls of 1 if they stand still. Let's take a look at that.
+
+```{r reroll}
+n <- 1000
+codex_24 <- replicate(n, to_attack(n= 5, skill = 3, reroll = 1)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+codex_12 <- replicate(n, to_attack(n= 10, skill = 3, reroll = 1)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+
+beta_24 <- replicate(n, to_attack(n= 10, skill = 3, reroll = 1)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+beta_12 <- replicate(n, to_attack(n= 20, skill = 3, reroll = 1)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+results <- tibble(
+  codex_24,
+  codex_12,
+  beta_24,
+  beta_12)
+
+results %>%
+  gather(key = 'key', value = 'value') %>%
+  tidyr::separate(key, c('type', 'range'), '_') %>%
+  mutate(type = case_when(type == 'codex' ~ 'Old rules',
+                          type == 'beta' ~ 'Beta rules'),
+         type = fct_rev(type),
+         range = case_when(range == '12' ~ '<= 12 Inches',
+                           range == '24' ~ '<= 24 Inches')) %>%
+  ggplot() +
+  geom_bar(aes(x = value, fill = type)) +
+  facet_grid(type ~ range) +
+  labs(x = 'Wounds Inflicted by 5 MEQs at MEQ target, w/ rerolls', y = 'Count') +
+  theme(legend.position = 'none') +
+  NULL
+
+```
+
+
+The effect of the Beta rules is even more pronounced when combined with re-rolls.
+
+And, just for fun, how about Deathwing Terminators firing at MEQs.
+
+```{r terminator}
+
+n <- 1000
+codex_24 <- replicate(n, to_attack(n= 4 * 5, skill = 2)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+codex_12 <- replicate(n, to_attack(n= 2 * (4 * 5), skill = 2)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+
+beta_24 <- replicate(n, to_attack(n= 8 * 5, skill = 2)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+beta_12 <- replicate(n, to_attack(n= 2 * (8 * 5), skill = 2)) %>%
+  map_dbl(., ~ to_wound(n = .x, str = 4, tgh = 4)) %>%
+  map_dbl(., ~ to_save(n = .x, sv = 3, ap = 0))
+
+results <- tibble(
+  codex_24,
+  codex_12,
+  beta_24,
+  beta_12)
+
+results %>%
+  gather(key = 'key', value = 'value') %>%
+  tidyr::separate(key, c('type', 'range'), '_') %>%
+  mutate(type = case_when(type == 'codex' ~ 'Old rules',
+                          type == 'beta' ~ 'Beta rules'),
+         type = fct_rev(type),
+         range = case_when(range == '12' ~ '<= 12 Inches',
+                           range == '24' ~ '<= 24 Inches')) %>%
+  ggplot() +
+  geom_bar(aes(x = value, fill = type)) +
+  facet_grid(type ~ range) +
+  labs(x = 'Wounds Inflicted by 5 TEQs at MEQ target', y = 'Count') +
+  theme(legend.position = 'none') +
+  NULL
+
+```
+
+Terminators totally destroy MEQs with the new Beta rules, it is crazy!
