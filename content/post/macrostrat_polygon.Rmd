@@ -9,7 +9,7 @@ header:
   image: ''
 ---
 
-[Macrostrat](https://macrostrat.org/) is a data service I've written [about before]({{< relref "/post/macrostrat.md" >}}). Today I'm going to explaining how to get the fancy geological unit polygons you see when go to their [interactive](https://macrostrat.org/map/#/z=1.5/x=16/y=23/bedrock/lines/) [geological maps](https://macrostrat.org/burwell/#3/40.80/-94.10). This is not covered or documented in the [Macrostrat API](https://macrostrat.org/api/v2/) -- I only figured it out through snooping, determination, and careful skimming of the [sift](https://github.com/UW-Macrostrat/sift) source code.
+[Macrostrat](https://macrostrat.org/) is a data service I've written [about before]({{< relref "/post/macrostrat.html" >}}). Today I'm going to explaining how to get the fancy geological unit polygons you see when go to their [interactive](https://macrostrat.org/map/#/z=1.5/x=16/y=23/bedrock/lines/) [geological maps](https://macrostrat.org/burwell/#3/40.80/-94.10). This is not covered or documented in the [Macrostrat API](https://macrostrat.org/api/v2/) -- I only figured it out through snooping, determination, and careful skimming of the [sift](https://github.com/UW-Macrostrat/sift) source code.
 
 The goal of this "how-to" is to get the map for at least one geological unit. But how do we find this?
 
