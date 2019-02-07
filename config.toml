@@ -243,11 +243,6 @@ defaultContentLanguageInSubdir = false
     icon_pack = "ai"
     link = "http://orcid.org/0000-0003-4074-1447"
 
-  [[params.social]]
-    icon = "google-plus"
-    icon_pack = "fab"
-    link = "https://plus.google.com/+PeterSmitsRPG"
-
 
 # Navigation Links
 #   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
