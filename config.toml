@@ -285,7 +285,7 @@ defaultContentLanguageInSubdir = false
   weight = 4
 
 [[menu.main]]
-  name = "Contact"
+  name = "CV/Contact"
   url = "#contact"
   weight = 5
 
