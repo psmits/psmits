@@ -1,6 +1,6 @@
 +++
 date = "2019-01-07"
-draft = true
+draft = false
 external_link = ""
 highlight = true
 image_preview = ""
