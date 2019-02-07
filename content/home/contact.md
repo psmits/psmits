@@ -15,6 +15,6 @@ autolink = true
 
 +++
 
-[Data Science Resume](/static/cv/smits_resume_2.pdf)
+[Data Science Resume](/cv/smits_resume_2.pdf)
 
-[Academic CV](/static/cv/smits_cv.pdf)
+[Academic CV](/cv/smits_cv.pdf)
