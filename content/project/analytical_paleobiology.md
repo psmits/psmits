@@ -16,6 +16,10 @@ title = "Teaching analytical paleobiology"
 +++
 
 
+Current webbook draft avaliable [here!](https://psmits.github.io/paleo_book/index.html)
+
+
+
 In 2018 I helped teach a graduate-level class at UC-Berkeley on analytical paleobiology. Since then I have continued to produce short modules covering many different aspects of analytical paleobiology. All of these lessons have been written in [RMarkdown](https://rmarkdown.rstudio.com/) and emphasize the use of [`tidyverse` packages](https://www.tidyverse.org/). Additionally, I emphasize Bayesian data analysis as fundamental and use the [`brms` package](https://github.com/paul-buerkner/brms) for implementing [Stan-based](https://mc-stan.org/) models in R.
 
 So far I have written lessons on 
