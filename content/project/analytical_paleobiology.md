@@ -5,9 +5,9 @@ external_link = ""
 highlight = true
 image_preview = ""
 math = false
-summary = "Teaching material on analytical paleobiology"
+summary = "Online Textbook and Tutorials"
 tags = ["academic"]
-title = "Teaching analytical paleobiology"
+title = "Teaching Material for Analytical Paleobiology"
 
 [header]
   caption = ""
