@@ -15,6 +15,4 @@ autolink = true
 
 +++
 
-[Data Science Resume 2019-02](/cv/smits_resume_2.pdf)
-
 [Academic CV 2019-02](/cv/smits_cv.pdf)

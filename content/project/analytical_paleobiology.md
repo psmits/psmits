@@ -16,7 +16,9 @@ title = "Teaching analytical paleobiology"
 +++
 
 
-I am writing a webbook on the analysis of paleontological data. The current draft of this book is [avaliable here!](https://psmits.github.io/paleo_book/index.html). This project started in 2018 when I helped teach a graduate-level class at UC-Berkeley on analytical paleobiology. Since then I have continued to produce short modules covering many different aspects of analytical paleobiology. 
+I am writing a webbook on the analysis of paleontological data. The first six chapters are [avaliable here!](https://psmits.github.io/paleo_book/index.html) 
+
+This project started in 2018 when I helped teach a graduate-level class at UC-Berkeley on analytical paleobiology. Since then I have continued to produce short modules covering many different aspects of analytical paleobiology. 
 
 So far I have written lessons on 
 
@@ -25,10 +27,10 @@ So far I have written lessons on
 3. Introduction to linear regression with a single binary predictor, emphasizing the interpretation of parameters and checking model adequacy.
 4. Continuing linear regression by introducing continuous predictors, methods for improving parameter interpretation, and further emphasis on checking model adequacy.
 5. Linear regression with categorical predictors with more than two levels, interpreting models with multiple predictors (incl. continuous and discrete), and methods for visualizing multivariate regression.
+6. Logistic regression
 
 The next few lessons are expected to cover the following
 
-- Logistic regression
 - Poisson regression
 - Random intercepts
 - Random slopes
