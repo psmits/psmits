@@ -15,4 +15,3 @@ autolink = true
 
 +++
 
-[Academic CV 2019-02](/cv/smits_cv.pdf)
