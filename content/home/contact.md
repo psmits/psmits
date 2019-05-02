@@ -15,3 +15,5 @@ autolink = true
 
 +++
 
+
+[Academic CV](/cv/smits_cv.pdf)
