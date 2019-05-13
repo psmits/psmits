@@ -27,15 +27,16 @@ So far I have written lessons on
 3. Introduction to linear regression with a single binary predictor, emphasizing the interpretation of parameters and checking model adequacy.
 4. Continuing linear regression by introducing continuous predictors, methods for improving parameter interpretation, and further emphasis on checking model adequacy.
 5. Linear regression with categorical predictors with more than two levels, interpreting models with multiple predictors (incl. continuous and discrete), and methods for visualizing multivariate regression.
-6. Logistic regression
+6. Logistic regression.
+7. Interaction terms in regression models.
+8. Varying-intercept models.
 
 The next few lessons are expected to cover the following
 
 - Poisson regression
-- Random intercepts
-- Random slopes
-- Phylogenetic mixed models (i.e. phylogenetic effect as random intercept)
+- Varying-intercept and varying-slopes models
 - Discrete time series
+- Phylogenetic mixed models (i.e. phylogenetic effect as random intercept)
 
 If you have any suggestions for other materials to cover, please head over to the [book's github page](https://github.com/psmits/paleo_book) and lodge an [issue](https://github.com/psmits/paleo_book/issues).
 
