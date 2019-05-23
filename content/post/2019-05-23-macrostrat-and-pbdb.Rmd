@@ -1,0 +1,322 @@
+---
+title: "Connecting Macrostrat and Paleobiology Database"
+author: ~
+date: '2019-05-23'
+slug: macrostrat-and-pbdb
+categories: []
+tags: ["academic", "macrostrat", "pbdb"]
+header:
+  caption: ''
+  image: ''
+  preview: yes
+---
+
+
+As a small project before I change careers, I've gone back to exploring the fossil record of the Ordovician and Silurian through the lens of how well does lithology predict the observed diversity or richness of fossils.
+
+This exploration requires data from the [Macrostrat](https://macrostrat.org/) and [Paleobiology Database](https://paleobiodb.org/#/) databases. While these two databases share a lot of similar ideas, they are not directly linked. Instead, Macrostrat entries have information linking them to PBDB occurrences and collections. These unique ideas are the key to connecting these two databases.
+
+For this "how-to", I'm focusing on adding information about a fossils geological context to that occurrence record. This requires geological unit and fossil collection information from Macrostrat, and then the relevant occurrence information from the PBDB. Once all this information is avaliable, it only takes a few joins to get us to a usable dataset.
+
+I've been writing out my explorations as I do them, so I'll just copy and paste them here.
+
+
+# Scrap data from DBs
+
+We are analyzing the association between fossils and the geological units in which they are found. The data for this analysis is spread across multiple databases, and multiple tables within those databases. 
+
+The first major source is Macrostrat, which provides geological information for North America. This information includes unique id-s for fossil collections made from those geological units. 
+
+The second major source is the Paleobiology Database, which provides information on those fossil occurrences. Macrostrat and PBDB are linked by a few key variables, most importantly `unit_id` (unique identifer for each geologicla unit.)
+
+In this section, I'm going to pull all of the correct tables from their respective databases. Which then sets up all of our subsequent analyses. We can regenerate/update our data at anytime by running this script. The only limits are internet connection and server status.
+
+Step 0 is loading some useful packages for loading and cleaning data.
+
+```{r packages, message = FALSE, results = 'hide'}
+
+library(pacman)
+
+p_load(here, janitor, tibble, readr, magrittr, dplyr, 
+       tidyr, purrr, glue, stringr, 
+       ggplot2, scales, viridis, ggrepel)
+
+```
+
+There are several useful constants that will appear throughout the next few sections.
+
+```{r constants}
+
+theme_set(theme_bw(base_size = 20))
+
+# colour blind palette of choice
+blind <- c("#999999", "#E69F00", "#56B4E9", "#009E73", 
+           "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# useful constants
+shelly <- c('Brachiopoda', 'Anthozoa', 'Trilobita', 
+            'Bivalvia', 'Gastropoda')#, 'Cephalopoda')
+temp_range <- c(485.4, 419.2)          # ordovicain + silurian
+hirnantian <- c(445.2, 443.8)
+
+```
+
+
+
+## Macrostrat units
+
+The next step is pulling all of the geological units recorded in Macrostrat for the Ordovician and the Silurian. I've had trouble writing out API call to do this all in one step, so I've broken it out by period and then combine them.
+
+```{r macro_unit, message = FALSE, results = 'hide'}
+
+ord_unit_url <- glue('https://macrostrat.org/api/v2/units?',
+                     'interval_name=Ordovician&response=long&format=csv')
+ord_unit <- read_csv(ord_unit_url)
+
+sil_unit_url <- glue('https://macrostrat.org/api/v2/units?',
+                     'interval_name=Silurian&response=long&format=csv')
+sil_unit <- read_csv(sil_unit_url)
+
+unit_data <- dplyr::union(ord_unit, sil_unit) # formerly `strat`
+
+```
+
+
+## Macrostrat fossils
+
+Now that we have the data for all of our fossil units, let's extract the relevant fossil information. `unit_id` is the key value that links the units and fossils tables within the Macrostrat DB. 
+
+However, not every unit that has Ordovician or Silurian sediments contains a fossil. A quick filter gives the `unit_id` values for fossil-bearing geological units. This vector can then be massaged and passed to the Macrostrat API.
+
+```{r macro_collect, message = FALSE, results = 'hide'}
+
+unit_w_fossils <- 
+  unit_data %>%
+  filter(pbdb_collections > 0) %>%
+  dplyr::select(unit_id) %>%
+  pull() %>%
+  glue_collapse(., sep = ',')
+
+collect_url <- glue('https://macrostrat.org/api/v2/fossils?unit_id=',
+                   '{unit_w_fossils}',
+                   '&response=long&format=csv')
+
+collect_data <- read_csv(collect_url)  # formerly `fossil`
+
+```
+
+
+## PBDB occurrences
+
+The `collect_data` tibble has all the necessary information to recover fossil occurrence information from the PBDB. The column `cltn_id` has the unique identifier for the PBDB collections assocated with each geological unit (`unit_id`). We can extract and massage the `cltn_id` column into a vector we can pass to the PBDB API, making a call for an occurrence list. The resulting tibble has a row for every fossil occurrence found in collections made from geological units that contain Ordovician or Siliurian sediments.
+
+```{r pbdb_occurrence, message = FALSE, results = 'hide'}
+
+pbdb_collections <- 
+  collect_data %>%
+  dplyr::select(cltn_id) %>%
+  pull() %>%
+  glue_collapse(., sep = ',')
+
+pbdb_url <- glue('https://paleobiodb.org/data1.2/occs/list.txt?coll_id=',
+                 '{pbdb_collections}',
+                 '&show=full')
+
+pbdb_data <- read_csv(pbdb_url) %>%    # formerly `taxon`
+  drop_na(genus)
+
+```
+
+
+
+# Preparing data for analysis
+
+The next step is to process our data so that it is ready for analysis. This process takes a lot of steps, but once it is complete we can start visualizing and modeling out data.
+
+
+## Joining Macrostrat and PBDB
+
+Now that that's out of the way, let's start getting out data into shape. An obvious first step is connect the Macrostrat units table to the fossils table. 
+
+There are multiple collections occurrences per unit, so I'll add all the appropriate unit information to each fossil collection. I'm not worrying about units that lack fossils (yet), hence the left join. 
+
+```{r join_macrostrat}
+
+collect_unit <- left_join(x = collect_data, y = unit_data, 
+                         by = c('unit_id', 'col_id', 't_age', 'b_age')) %>%
+  dplyr::select(-(genus_no:taxon_no), refs.y) # redundant/unnecessary
+
+print(collect_unit)
+
+```
+
+This gives a single table with all fossil collections associated with their geological information (lithology, age, etc.) The next step is associating the geological context of each collection with the individual occurrences within that collection. I'm only caring about occurrences recorded in the PBDB -- they have the most information -- hence the left join. I'm also going to filter the occurrences to just those of shelly marine taxa which I defined above as one of the useful constants.
+
+```{r join_pbdb}
+
+occur_collect <- 
+  pbdb_data %>%
+  filter(phylum %in% shelly | class %in% shelly) %>%
+  left_join(., collect_unit, by = c('collection_no' = 'cltn_id')) %>%
+  mutate(occur_mid_ma = (max_ma + min_ma) / 2,
+         unit_mid_ma = (t_age + b_age) / 2)
+
+```
+
+
+## Filter by occurrence age
+
+A big issue is that these occurrences from all over time, not just the Ordovician + Silurian. Just look.
+
+```{r vis_ages}
+
+occur_collect %>% 
+  ggplot(aes(x = occur_mid_ma)) +
+  geom_bar(width = 2) +
+  scale_x_reverse()
+
+```
+
+This problem due to geological units not being restricted to a particular time interval. A unit can range through, into, or out of our target temporal range.
+
+To overcome this and focus only on fossil occurrences from the Ordovician or Silurian, I filtering down to only those occurrences who's mid-point age is within `temp_range`.
+
+```{r filter_age}
+
+occur_collect %<>%
+  filter(between(occur_mid_ma, temp_range[2], temp_range[1]))
+
+occur_collect %>%
+  ggplot(aes(x = occur_mid_ma)) +
+  geom_bar(width = 2) +
+  scale_x_reverse()
+
+```
+
+Much better.
+
+
+
+## Binning occurrences
+
+The fossil record is a discrete recording of continuous time which creates all kinds of problems. Additionally, paleo-time is more of a range than an instaneous value. Binning out data helps alleviate this -- it just requires us to define a temporal width for each bin. There are two ways to do this: predetermine how many bins you want, or pick an (arbitrary) value. Luckily I've written a function that can do both: `bin_ages()`.
+
+```{r bin_ages}
+
+#' Break time data up into bins
+#' 
+#' Have fun with this. Basic rules. Greater than equal to base, less than top.
+#' 
+#' @param x vector of ages
+#' @param by bin width
+#' @param age logical bin age returned, not number (default FALSE, return bin number)
+#' @return vector of bin memberships
+#' @author Peter D Smits <peterdavidsmits@gmail.com>
+#' @export
+bin_ages <- function(x, by = NULL, number = NULL, age = FALSE) {
+
+  if(is.null(by) & is.null(number)) {
+    return('no scheme given. Specify either bin width or number of bins.')
+  }
+
+  if(!is.null(by) & !is.null(number)) {
+    return('too much information. Specify either bin width OR number of bins, not both.')
+  }
+
+  # range to bin
+  top <- ceiling(max(x))
+  bot <- floor(min(x))
+
+  # create bins
+  if(!is.null(by)) {
+    unt <- seq(from = bot, to = top, by = by)
+  } else if(!is.null(number)) {
+    unt <- seq(from = bot, to = top, length.out = number + 1)
+  }
+
+  # bin top and bottom
+  unt1 <- unt[-length(unt)]
+  unt2 <- unt[-1]
+
+  # assign memberships
+  uu <- map2(unt1, unt2, ~ which(between(x, left = .x, right = .y)))
+
+  # what if we want the "age" of the bin, not number?
+  if(age == TRUE) {
+    unt_age <- map2_dbl(unt1, unt2, ~ median(c(.x, .y)))
+  }
+
+  # create output vector
+  y <- x
+  for(ii in seq(length(uu))) {
+    if(age == FALSE) {
+      y[uu[[ii]]] <- ii
+    } else if(age == TRUE) {
+      y[uu[[ii]]] <- unt_age[ii]
+    }
+  }
+  y
+}
+
+```
+
+
+I want to compare multiple arbitrary bin widths to pick whatever feels "smoothest". Sadly, I have trouble defining this algorithmically, but the general idea is to have as many bins as possible to have 1+ fossils and there are as few bins as possible with 0 fossils. Common bin widths include 1, 2, 5, and 10 million years, but I'm gonna look at a few more. 
+
+```{r compare_bin}
+
+occur_collect %>%
+  transmute(bin_01 = bin_ages(occur_mid_ma, by = 1, age = TRUE),
+            bin_02 = bin_ages(occur_mid_ma, by = 2, age = TRUE),
+            bin_025 = bin_ages(occur_mid_ma, by = 2.5, age = TRUE),
+            bin_05 = bin_ages(occur_mid_ma, by = 5, age = TRUE),
+            bin_10 = bin_ages(occur_mid_ma, by = 10, age = TRUE)) %>%
+  gather(key = key, value = value) %>%
+  ggplot(aes(x = value)) +
+  geom_bar(width = 2) +
+  facet_grid(key ~ .) +
+  scale_x_reverse()
+
+```
+
+2 and 2.5 seem like the nicest of these options, and I like to favor having a lot of bins over having few bins so I'm going to stick with 2 million year bins.
+
+
+### Saving the Hirnantian
+
+However, there is a twist -- we're *really* interested in the occurrence patterns during the Hirnantian. This means I'd like the Hirnantian time interval preserved. The Hirnantian lasted from 445.2 to 443.8 Ma -- a *really* small interval of time.
+
+A solution is to bin all the data *before* and *after* the Hirnantian as per usual, leaving the Hirnantian as a one-off.  Here is that effort.
+
+
+```{r bin_occur}
+
+occur_before <- 
+  occur_collect %>%
+  filter(occur_mid_ma > max(hirnantian)) %>%
+  mutate(bin_age = bin_ages(occur_mid_ma, by = 2, age = TRUE)) %>%
+  dplyr::select(occurrence_no, bin_age)
+
+occur_after <- 
+  occur_collect %>%
+  filter(occur_mid_ma < min(hirnantian)) %>%
+  mutate(bin_age = bin_ages(occur_mid_ma, by = 2, age = TRUE)) %>%
+  dplyr::select(occurrence_no, bin_age)
+
+
+occur_collect %<>%
+  left_join(., occur_before, by = 'occurrence_no') %>%
+  left_join(., occur_after, by = 'occurrence_no') %>%
+  mutate(bin_age = coalesce(bin_age.x, bin_age.y),
+         bin_age = if_else(is.na(bin_age),
+                           true = 445.2,
+                           false = bin_age),
+         # worst trick in the book
+         # lower values, younger bin
+         bin_num = as.numeric(as.factor(bin_age))) %>% 
+  dplyr::select(-bin_age.x, -bin_age.y)
+
+```
+
+Now are tibble `occur_collect` has every observation assigned to a temporal bin and we know one of these bins (i.e. 445.2) is the Hirnantian. I've saved this to disk so it can be shared/interrogated on its own.
+
