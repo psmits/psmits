@@ -1,5 +1,5 @@
 +++
-title = "Inspecting fossil diveristy in Macrostrat units"
+title = "Inspecting fossil diversity in Macrostrat units"
 date = 2018-02-12
 draft = false
 
@@ -25,7 +25,7 @@ In this post I'm going to dive deeper in to [Macrostrat](https://macrostrat.org)
 
 Our initial data call is exactly the same as my previous post; I'm looking for geological units with Permian sediments: https://macrostrat.org/api/v2/units?interval_name=Permian&response=long&format=csv. Unfortunately this API call does not return useful information about what fossils are found in the geologic unit, only how many. Fortunately, this is pretty easy to overcome.
 
-To get the fossil information for each geological unit, I need make another API call. With a tiny bit of code the unit id's are transformed into a comma seperated string that can be used to form the appropriate url
+To get the fossil information for each geological unit, I need make another API call. With a tiny bit of code the unit id's are transformed into a comma separate string that can be used to form the appropriate url
 
 ```
 strat <- read.csv('https://macrostrat.org/api/v2/units?interval_name=Permian&response=long&format=csv', 
