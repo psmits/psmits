@@ -11,7 +11,7 @@ weight = 1
 [interests]
   interests = [
     "Bayesian statistics",
-    "Multilevel/hierarhical models",
+    "Multilevel/hierarchical models",
     "Modeling observational data",
     "Data Science",
     "Tabletop role-playing games"
