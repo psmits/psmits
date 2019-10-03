@@ -51,13 +51,13 @@ defaultContentLanguageInSubdir = false
 
   # Your details.
   name = "Peter D Smits"
-  role = ""
+  role = "Data Science Fellow"
 
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-  organization = ""
-  organization_url = ""
+  organization = "Insight Data Science"
+  organization_url = "https://www.insightdatascience.com/"
 
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
   avatar = "peter.jpg"
