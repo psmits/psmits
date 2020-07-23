@@ -37,7 +37,7 @@ weight = 1
 
 # Biography
 
-I am a Data Science Fellow at Insight Data Science in Seattle.
+I am a Data Scientist at Amazon in their Advertising division. I work for an internal facing team where I develop multilevel Bayesian models for understanding how user's can improve advertisement campaign setup. I primarily work with longitudinal and survival/time-to-event data, with a particular focus on discrete/count outcomes.
 
 My training is in paleobiology and macroevolutionary biology. My previous work focused on analyzing macroevolutionary and macroecological patterns in the fossil record. Particular phenomena of interest included trait-dependent extinction, dynamics of functional diversity of species pools, and Bayesian approaches to modeling evolutionary and ecological data. My research has spanned a wide variety of taxa from mammals to crocodilians to forams, though my PhD focused on Cenozoic mammals and Paleozoic brachiopods. A common across my work is a continued use of modern statistics and data science tools such as [Stan](http://mc-stan.org/) and [R](https://cran.r-project.org/).
 
