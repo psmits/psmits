@@ -109,7 +109,7 @@
 %
 \usepackage{fancyhdr,lastpage}
 \pagestyle{fancy}
-%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\pagestyle{empty}      % Uncomment this to get rid of page numbers
 \fancyhf{}\renewcommand{\headrulewidth}{0pt}
 \fancyfootoffset{\marginparsep+\marginparwidth}
 \newlength{\footpageshift}
@@ -227,236 +227,237 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\pagenumbering{gobble}
 \begin{document}
-\makeheading{Peter David Smits}
+% \makeheading{Peter David Smits}
 
-\section{Contact Information}
-
-% NOTE: Mind where the & separators and \\ breaks are in the following
-%       table.
-%
-% ALSO: \rcollength is the width of the right column of the table
-%       (adjust it to your liking; default is 1.85in).
-%
-\newlength{\rcollength}\setlength{\rcollength}{1.4in}%
-%
-\begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
-  %\href{http://www.cse.osu.edu/}%
-  %     {Department of Computer Science and Engineering} & \\
-  %\href{http://www.osu.edu/}{The Ohio State University}
-  Valley Life Sciences Building, Office 5151 & 609-933-7042 \\
-  Berkeley, CA  94720 & \email{psmits@berkeley.edu}\\
-\end{tabular}
-
-%\section{Objective}
-
-%Insert text here if you want to
-%\begin{innerlist}
-%\item More information and auxiliary documents can be found at\\\url{http://www.tedpavlic.com/facjobsearch/}
-%\end{innerlist}
-
-\section{Research Interests}
-
-Macroevolution, macroecology, paleobiology, Bayesian modeling, extinction, mammals, brachiopods, survival analysis, time-series analysis, longitudinal and cross-sectional data analysis
-
-\section{Education}
-
-\textbf{University of Chicago}, Chicago, IL
-\begin{outerlist}
-\item[] Ph.D., Committee on Evolutionary Biology, June 2017
-  \begin{innerlist}
-  %\item Thesis Topic: \emph{ }
-  \item Advisors: Michael Foote and Kenneth Angielcyzk
-  \end{innerlist}
-\end{outerlist}
-\vspace{.1in}
-\textbf{Monash University}, Melbourne, AUS 
-\begin{outerlist}
-\item[] M.S., Biological Sciences, Aug 2012
-  \begin{innerlist}
-  \item \emph{First Class Honours}
-  %\item Topic: \emph{ }
-  \item Advisor: Alistair Evans
-  \end{innerlist}
-\end{outerlist}
-\vspace{.1in}
-\textbf{University of Washington}, Seattle, WA
-\begin{outerlist}
-\item[] B.S., Biology: Ecology and Evolution, June 2010
-\end{outerlist}
-
-%\section{Research Experience}
-%
-%\textbf{Research Assistant} \hfill {May 2011 to present}
-%\begin{innerlist}
-%
-%\item[] Division of Biostatistics,\\
-%  University of Minnesota\\
-%        Supervisor: Bradley P. Carlin, Ph.D
-%\end{innerlist}
-%\textbf{Research Assistant} \hfill {June 2010 to May 2011}
-%\begin{innerlist}
-%
-%\item[] Division of Epidemiology,\\
-%  University of Minnesota\\
-%        Supervisors: Traci L. Toomey, Ph.D and Bradley P. Carlin, Ph.D
-%\end{innerlist}
-%\textbf{Research Assistant} \hfill {Sept 2008 to Aug 2010}
-%\begin{innerlist}
-%
-%\item[] Division of Biostatistics,\\
-%  University of Minnesota\\
-%        Supervisors: Katherine Huppler-Hullsiek, Ph.D and Jason V. Baker, M.D., M.S.
-%\end{innerlist}
-
-\section{Publications}
-\vspace{-.1275in}
-\begin{bibsection}
-\item {\bf Peter D Smits}. How macroecology affects macroevolution: the interplay between extinction intensity and trait-dependent extinction in brachiopods. \emph{bioRxiv}, doi: https://doi.org/10.1101/523811, 2019.
-\item Stewart M Edie, {\bf Peter D Smits}, David Jablonski. Probabilistic models of species discovery and biodiversity comparisons. \emph{Proceedings of the National Academy of Sciences}, 114(14):3666-3671, 2017.
-\item {\bf Peter D Smits}. Expected time-invariant effects of biological traits on mammal species duration. \emph{Proceedings of the National Academy of Sciences}, 112(42):13015–13020, 2015.
-\item Liliana M Davalos, Paul M Velazco, Omar M Warsi, {\bf Peter D Smits}, Nancy B Simmons. Integrating Incomplete Fossils by Isolating Conflicting Signal in Saturated and Non-Independent Morphological Characters. \emph{Systematic Biology}, 63(4):582-600, 2014.
-\item Christopher W Walmsley, {\bf Peter D Smits}, Michelle R Quayle, Matthew R Mc-Curry, Heather S Richard, Christopher C Oldfield, Stephen Wroe, Phillip D Clausen, and Colin R McHenry. Why the fong face? The mechanics of mandibular symphysis proportions in crocodiles. \emph{PLoS ONE}, 8(1):e53873, 2013.
-\item {\bf Peter D Smits}, Alistair R Evans. Functional constraints on tooth morphology in carnivorous mammals. \emph{BMC Evolutionary Biology}, 12(1):146, 2012.
-\item Gregory P Wilson, Alistair R Evans, Ian J Corfe, {\bf Peter D Smits}, Mikael Fortelius, and Jukka Jernvall. Adaptive radiation of multituberculate mammals before the extinction of dinosaurs. \emph{Nature}, 483:457-460, 2012.
-\end{bibsection}
-
-%\section{Submitted Journal Publications}
-%\vspace{-.125in}
-%\begin{bibsection}
-%\item Toomey, T.L., Erickson, D.J., Carlin, B.P., Lenk, K.M., {\bf Quick, H.S.}, and Harwood, E.M. ``Do neighborhood attributes moderate the relationship between alcohol establishment density and crime?" 2012. Submitted to \emph{Prevention Science}.
-%\end{bibsection}
-
-% Add a little space to nudge next ``Conference Publications'' marginpar
-% down to make room for tall ``Submitted Journal Publications''
-% marginpar. If there are enough submitted journal publications, this
-% space will not be needed (and should be removed).
-%\vspace{0.1in}
-
-\section{Papers in Submission}
-\vspace{-.1in}
-\begin{bibsection}
-\item {\bf Peter D Smits}, Seth Finnegan. How predictable is extinction? Forecasting species survival at million-year timescales.
-\item {\bf Peter D Smits}, Kenneth D Angielczyk, James F Parham, Bryan Stuart. Supervised learning approaches to classifying morphological variation: assessing taxonomic hypotheses for the Pacific Pond Turtle (Emys marmorata).
-\end{bibsection}
-
-\section{Awards}
-Student Awards --- University of Chicago
-\begin{innerlist}
-\item Hinds Fund Grant
-\end{innerlist}
-
-\halfblankline
-
-Student Awards --- Monash University
-\begin{innerlist}
-\item Vice-Chancellor's Commendation for Master's Thesis Excellence, 2012.
-  \begin{innerlist}
-  \item The Vice-Chancellor's Commendation is give out to the best thesis submitted that year across all divisions at the university; between 0 and 5 are awarded per year.
-  \end{innerlist}
-\end{innerlist}
-
-\halfblankline
-
-Student Awards --- University of Washington, Department of Biology
-\begin{innerlist}
-\item Casey Award for Research, 2008.
-\end{innerlist}
-
-\halfblankline
-
-Travel Awards
-\begin{innerlist}
-\item Summer Travel Award, Committee on Evolutionary Biology, 2013, 2014, 2015, 2016.
-\item Student Travel Stipend, Society for the Study of Evolutionary Biology, 2015.
-\item Faculty of Science Travel Grant, Monash University, 2011.
-\end{innerlist}
-
-
-\section{Presentations}
-Professional Meetings (last 5 years)
-\begin{innerlist}
-\item Geological Society of America Annual Meeting, Indianapolis, IN \hfill November 2018
-\item Geological Society of America Annual Meeting, Seattle, WA \hfill Sept 2017
-\item Geological Society of America Annual Meeting, Denver, CO \hfill Sept 2016
-\item Evolution Meetings, Austin, TX \hfill June 2016
-\item Geological Society of America Annual Meeting, Baltimore, MD \hfill Nov 2015
-\item Evolution Meetings, Guaruja, Brazil \hfill June 2015
-\item Geological Society of America Annual Meeting, Vancouver, BC \hfill Oct 2016
-\item Evolution Meetings, Raleigh, NC \hfill June 2014
-\item Society for Vertebrate Paleontology, Los Angeles, LA \hfill Oct 2013
-\item Evolution Meetings, Snowbird, UT \hfill June 2013
-\end{innerlist}
-
-
-
-\section{Teaching Experience}
-
-%\textbf{Teaching Assistant} \hfill {Springs 2011--12}
-
-Co-Instructor \hfill {Fall 2018}
-\begin{innerlist}
-\item[] Analytical Paleobiology \\
-  with Seth Finnegan, Charles Marshall \\
-        Department of Integrative Biology, \\
-        Univeristy of California Berkeley
-\end{innerlist}
-
-Co-instructor \hfill {Falls 2015--16}
-\begin{innerlist}
-\item[] BSDG 5000 - Teaching Assistant Training\\
-  with Alicja Santos \\
-        Division of Biological Sciences,\\
-        University of Chicago 
-\end{innerlist}
-
-Teaching Assistant \hfill {Spring 2016}
-\begin{innerlist}
-\item[] BIOS 20151 - Introduction to Quantitative Modeling in Biology\\
-  Instructor: Dmitry Kondrashov\\
-        Division of Biological Sciences,\\
-        University of Chicago  
-\end{innerlist}
-
-Teaching Assistant \hfill {Winter 2015}
-\begin{innerlist}
-\item[] BIOS 13107 - Environmental Ecology \\
-  Instructor: Trevor Price\\
-        Division of Biological Sciences,\\
-        University of Chicago  
-\end{innerlist}
-
-Teaching Assistant \hfill {Spring 2012}
-\begin{innerlist}
-\item[] BIO2011 - Research Methods \\
-  Instructor: Ross Thompson, Patrick Baker\\
-        School of Biological Sciences,\\
-        Monash University
-\end{innerlist}
-
-Peer Teaching Assistant \hfill {Fall 2009}
-\begin{innerlist}
-\item[] Biol 443 - Evolution of Mammals and their Ancestors \\
-  Instructor: Gregory Wilson\\
-        Department of Biology \\
-        University of Washington
-\end{innerlist}
-
-\section{Service}
-Recording Secretary for UC Berkeley, University of California Postdoctoral Union, UAW 5180 \hfill {December 2018 -- Present}
-%\begin{innerlist}
-%\item Assist with planning of annual Division of Biostatistics Open House and Admitted Student Visit Days
-%\item Meet with prospective and admitted students %; answer questions from a student's perspective
-%\end{innerlist}
-%
-%\halfblankline
-%
-%Student Member of Search Committee for the \hfill {June 2010 -- Aug 2010}\\
-%SPH Coordinator of Recruitment and Student Leadership
-%\begin{innerlist}
-%\item Assisted in job search for the SPH Coordinator of Recruitment and Student Leadership
-%\item Reviewed applications, conducted interviews
-%\end{innerlist}
+% \section{Contact Information}
+% 
+% % NOTE: Mind where the & separators and \\ breaks are in the following
+% %       table.
+% %
+% % ALSO: \rcollength is the width of the right column of the table
+% %       (adjust it to your liking; default is 1.85in).
+% %
+% \newlength{\rcollength}\setlength{\rcollength}{1.4in}%
+% %
+% \begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
+%   %\href{http://www.cse.osu.edu/}%
+%   %     {Department of Computer Science and Engineering} & \\
+%   %\href{http://www.osu.edu/}{The Ohio State University}
+%   Valley Life Sciences Building, Office 5151 & 609-933-7042 \\
+%   Berkeley, CA  94720 & \email{psmits@berkeley.edu}\\
+% \end{tabular}
+% 
+% %\section{Objective}
+% 
+% %Insert text here if you want to
+% %\begin{innerlist}
+% %\item More information and auxiliary documents can be found at\\\url{http://www.tedpavlic.com/facjobsearch/}
+% %\end{innerlist}
+% 
+% \section{Research Interests}
+% 
+% Macroevolution, macroecology, paleobiology, Bayesian modeling, extinction, mammals, brachiopods, survival analysis, time-series analysis, longitudinal and cross-sectional data analysis
+% 
+% \section{Education}
+% 
+% \textbf{University of Chicago}, Chicago, IL
+% \begin{outerlist}
+% \item[] Ph.D., Committee on Evolutionary Biology, June 2017
+%   \begin{innerlist}
+%   %\item Thesis Topic: \emph{ }
+%   \item Advisors: Michael Foote and Kenneth Angielcyzk
+%   \end{innerlist}
+% \end{outerlist}
+% \vspace{.1in}
+% \textbf{Monash University}, Melbourne, AUS 
+% \begin{outerlist}
+% \item[] M.S., Biological Sciences, Aug 2012
+%   \begin{innerlist}
+%   \item \emph{First Class Honours}
+%   %\item Topic: \emph{ }
+%   \item Advisor: Alistair Evans
+%   \end{innerlist}
+% \end{outerlist}
+% \vspace{.1in}
+% \textbf{University of Washington}, Seattle, WA
+% \begin{outerlist}
+% \item[] B.S., Biology: Ecology and Evolution, June 2010
+% \end{outerlist}
+% 
+% %\section{Research Experience}
+% %
+% %\textbf{Research Assistant} \hfill {May 2011 to present}
+% %\begin{innerlist}
+% %
+% %\item[] Division of Biostatistics,\\
+% %  University of Minnesota\\
+% %        Supervisor: Bradley P. Carlin, Ph.D
+% %\end{innerlist}
+% %\textbf{Research Assistant} \hfill {June 2010 to May 2011}
+% %\begin{innerlist}
+% %
+% %\item[] Division of Epidemiology,\\
+% %  University of Minnesota\\
+% %        Supervisors: Traci L. Toomey, Ph.D and Bradley P. Carlin, Ph.D
+% %\end{innerlist}
+% %\textbf{Research Assistant} \hfill {Sept 2008 to Aug 2010}
+% %\begin{innerlist}
+% %
+% %\item[] Division of Biostatistics,\\
+% %  University of Minnesota\\
+% %        Supervisors: Katherine Huppler-Hullsiek, Ph.D and Jason V. Baker, M.D., M.S.
+% %\end{innerlist}
+% 
+% \section{Publications}
+% \vspace{-.1275in}
+% \begin{bibsection}
+% \item {\bf Peter D Smits}. How macroecology affects macroevolution: the interplay between extinction intensity and trait-dependent extinction in brachiopods. \emph{bioRxiv}, doi: https://doi.org/10.1101/523811, 2019.
+% \item Stewart M Edie, {\bf Peter D Smits}, David Jablonski. Probabilistic models of species discovery and biodiversity comparisons. \emph{Proceedings of the National Academy of Sciences}, 114(14):3666-3671, 2017.
+% \item {\bf Peter D Smits}. Expected time-invariant effects of biological traits on mammal species duration. \emph{Proceedings of the National Academy of Sciences}, 112(42):13015–13020, 2015.
+% \item Liliana M Davalos, Paul M Velazco, Omar M Warsi, {\bf Peter D Smits}, Nancy B Simmons. Integrating Incomplete Fossils by Isolating Conflicting Signal in Saturated and Non-Independent Morphological Characters. \emph{Systematic Biology}, 63(4):582-600, 2014.
+% \item Christopher W Walmsley, {\bf Peter D Smits}, Michelle R Quayle, Matthew R Mc-Curry, Heather S Richard, Christopher C Oldfield, Stephen Wroe, Phillip D Clausen, and Colin R McHenry. Why the fong face? The mechanics of mandibular symphysis proportions in crocodiles. \emph{PLoS ONE}, 8(1):e53873, 2013.
+% \item {\bf Peter D Smits}, Alistair R Evans. Functional constraints on tooth morphology in carnivorous mammals. \emph{BMC Evolutionary Biology}, 12(1):146, 2012.
+% \item Gregory P Wilson, Alistair R Evans, Ian J Corfe, {\bf Peter D Smits}, Mikael Fortelius, and Jukka Jernvall. Adaptive radiation of multituberculate mammals before the extinction of dinosaurs. \emph{Nature}, 483:457-460, 2012.
+% \end{bibsection}
+% 
+% %\section{Submitted Journal Publications}
+% %\vspace{-.125in}
+% %\begin{bibsection}
+% %\item Toomey, T.L., Erickson, D.J., Carlin, B.P., Lenk, K.M., {\bf Quick, H.S.}, and Harwood, E.M. ``Do neighborhood attributes moderate the relationship between alcohol establishment density and crime?" 2012. Submitted to \emph{Prevention Science}.
+% %\end{bibsection}
+% 
+% % Add a little space to nudge next ``Conference Publications'' marginpar
+% % down to make room for tall ``Submitted Journal Publications''
+% % marginpar. If there are enough submitted journal publications, this
+% % space will not be needed (and should be removed).
+% %\vspace{0.1in}
+% 
+% \section{Papers in Submission}
+% \vspace{-.1in}
+% \begin{bibsection}
+% \item {\bf Peter D Smits}, Seth Finnegan. How predictable is extinction? Forecasting species survival at million-year timescales.
+% \item {\bf Peter D Smits}, Kenneth D Angielczyk, James F Parham, Bryan Stuart. Supervised learning approaches to classifying morphological variation: assessing taxonomic hypotheses for the Pacific Pond Turtle (Emys marmorata).
+% \end{bibsection}
+% 
+% \section{Awards}
+% Student Awards --- University of Chicago
+% \begin{innerlist}
+% \item Hinds Fund Grant
+% \end{innerlist}
+% 
+% \halfblankline
+% 
+% Student Awards --- Monash University
+% \begin{innerlist}
+% \item Vice-Chancellor's Commendation for Master's Thesis Excellence, 2012.
+%   \begin{innerlist}
+%   \item The Vice-Chancellor's Commendation is give out to the best thesis submitted that year across all divisions at the university; between 0 and 5 are awarded per year.
+%   \end{innerlist}
+% \end{innerlist}
+% 
+% \halfblankline
+% 
+% Student Awards --- University of Washington, Department of Biology
+% \begin{innerlist}
+% \item Casey Award for Research, 2008.
+% \end{innerlist}
+% 
+% \halfblankline
+% 
+% Travel Awards
+% \begin{innerlist}
+% \item Summer Travel Award, Committee on Evolutionary Biology, 2013, 2014, 2015, 2016.
+% \item Student Travel Stipend, Society for the Study of Evolutionary Biology, 2015.
+% \item Faculty of Science Travel Grant, Monash University, 2011.
+% \end{innerlist}
+% 
+% 
+% \section{Presentations}
+% Professional Meetings (last 5 years)
+% \begin{innerlist}
+% \item Geological Society of America Annual Meeting, Indianapolis, IN \hfill November 2018
+% \item Geological Society of America Annual Meeting, Seattle, WA \hfill Sept 2017
+% \item Geological Society of America Annual Meeting, Denver, CO \hfill Sept 2016
+% \item Evolution Meetings, Austin, TX \hfill June 2016
+% \item Geological Society of America Annual Meeting, Baltimore, MD \hfill Nov 2015
+% \item Evolution Meetings, Guaruja, Brazil \hfill June 2015
+% \item Geological Society of America Annual Meeting, Vancouver, BC \hfill Oct 2016
+% \item Evolution Meetings, Raleigh, NC \hfill June 2014
+% \item Society for Vertebrate Paleontology, Los Angeles, LA \hfill Oct 2013
+% \item Evolution Meetings, Snowbird, UT \hfill June 2013
+% \end{innerlist}
+% 
+% 
+% 
+% \section{Teaching Experience}
+% 
+% %\textbf{Teaching Assistant} \hfill {Springs 2011--12}
+% 
+% Co-Instructor \hfill {Fall 2018}
+% \begin{innerlist}
+% \item[] Analytical Paleobiology \\
+%   with Seth Finnegan, Charles Marshall \\
+%         Department of Integrative Biology, \\
+%         Univeristy of California Berkeley
+% \end{innerlist}
+% 
+% Co-instructor \hfill {Falls 2015--16}
+% \begin{innerlist}
+% \item[] BSDG 5000 - Teaching Assistant Training\\
+%   with Alicja Santos \\
+%         Division of Biological Sciences,\\
+%         University of Chicago 
+% \end{innerlist}
+% 
+% Teaching Assistant \hfill {Spring 2016}
+% \begin{innerlist}
+% \item[] BIOS 20151 - Introduction to Quantitative Modeling in Biology\\
+%   Instructor: Dmitry Kondrashov\\
+%         Division of Biological Sciences,\\
+%         University of Chicago  
+% \end{innerlist}
+% 
+% Teaching Assistant \hfill {Winter 2015}
+% \begin{innerlist}
+% \item[] BIOS 13107 - Environmental Ecology \\
+%   Instructor: Trevor Price\\
+%         Division of Biological Sciences,\\
+%         University of Chicago  
+% \end{innerlist}
+% 
+% Teaching Assistant \hfill {Spring 2012}
+% \begin{innerlist}
+% \item[] BIO2011 - Research Methods \\
+%   Instructor: Ross Thompson, Patrick Baker\\
+%         School of Biological Sciences,\\
+%         Monash University
+% \end{innerlist}
+% 
+% Peer Teaching Assistant \hfill {Fall 2009}
+% \begin{innerlist}
+% \item[] Biol 443 - Evolution of Mammals and their Ancestors \\
+%   Instructor: Gregory Wilson\\
+%         Department of Biology \\
+%         University of Washington
+% \end{innerlist}
+% 
+% \section{Service}
+% Recording Secretary for UC Berkeley, University of California Postdoctoral Union, UAW 5180 \hfill {December 2018 -- Present}
+% %\begin{innerlist}
+% %\item Assist with planning of annual Division of Biostatistics Open House and Admitted Student Visit Days
+% %\item Meet with prospective and admitted students %; answer questions from a student's perspective
+% %\end{innerlist}
+% %
+% %\halfblankline
+% %
+% %Student Member of Search Committee for the \hfill {June 2010 -- Aug 2010}\\
+% %SPH Coordinator of Recruitment and Student Leadership
+% %\begin{innerlist}
+% %\item Assisted in job search for the SPH Coordinator of Recruitment and Student Leadership
+% %\item Reviewed applications, conducted interviews
+% %\end{innerlist}
 
 \section{References}
 
@@ -487,12 +488,12 @@ P.\ David Polly
 
 \halfblankline
 
-Seth Finnegan
-\begin{innerlist}
-\item[] Associate Professor \hfill {Phone: 510-664-9916}\\
-  Department of Integrative Biology \hfill{E-mail: sethf@berkeley.edu}\\
-  University of California Berkeley
-\end{innerlist}
+% Seth Finnegan
+% \begin{innerlist}
+% \item[] Associate Professor \hfill {Phone: 510-664-9916}\\
+%   Department of Integrative Biology \hfill{E-mail: sethf@berkeley.edu}\\
+%   University of California Berkeley
+% \end{innerlist}
 
 \end{document}
 

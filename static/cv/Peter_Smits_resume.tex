@@ -9,7 +9,7 @@
 
 % GENERAL NOTE:  There may be some notes specific to myself.  If you're only interested in my LaTeX source or it doesn't make sense, please disregard it.
 
-\documentclass[letterpaper,11pt]{article}
+\documentclass[letterpaper,10pt]{article}
 
 %-----------------------------------------------------------
 \usepackage{latexsym}
@@ -106,14 +106,14 @@
 \resheading{Skills}
 \begin{description}[itemsep=-1mm]
     %\begin{small}
-    \item \textbf{Languages/Tools:}  R, Stan, Python, SQL, bash, \LaTeX, git
+    \item \textbf{Languages/Tools:}  R, Stan, Python, SQL, bash, \LaTeX, git, Docker
     \item \textbf{Packages:} \vspace{-5pt}
       \begin{itemize}[itemsep=-1mm]
-        \item \textbf{R:} brms, rstan, rstanarm, ggplot2, tidyverse, knitr, caret, shiny
-        \item \textbf{Python:} pandas, numpy, beautifulsoup, keras, flask
+        \item \textbf{R:} brms, rstan, rstanarm, lme4, ggplot2, tidyverse, tidymodels, rmarkdown/knitr, shiny
+        \item \textbf{Python:} pandas, numpy, beautifulsoup, flask
       \end{itemize}
-    \item \textbf{Statistics:} Bayesian data analysis, multilevel/hierarchical modeling, survival analysis, time series analysis
-    \item \textbf{Machine Learning:} regression, decision trees/CART, random forests, k-means, hierarchical clustering, regularization, feature engineering/selection, dimensionality reduction/PCA, NLP, neural networks
+    \item \textbf{Statistics:} Bayesian statistics, multilevel/hierarchical modeling, survival analysis, longitudinal data analysis
+    \item \textbf{Machine Learning:} regression, decision trees/CART, random forests, k-means, hierarchical clustering, regularization, feature engineering/selection, dimensionality reduction/PCA, neural networks
     %\end{small}
 \end{description} % End Skills list
 \vspace{0.05in}
@@ -124,12 +124,22 @@
 \resheading{Experience}
 \begin{itemize}[itemsep=0mm]
   \item 
-    \ressubheading{Data Science Fellow}{Seattle, WA}{Insight Data Science}{Sept 2019 -- present}
+    \ressubheading{Data Scientist II}{Seattle, WA}{Amazon -- Advertising}{January 2020 -- present}
+    { %normalsize%small%footnotesize
+      \begin{itemize}
+        \resitem{Developed Recommendation Impact, a data processing and modeling pipeline for measuring the effect of advertising campaign suggestions on daily advertising performance \textbf{R}, \textbf{Docker}, \textbf{ECR} and other AWS tools.}
+        \resitem{Designed multilevel/mixed-effects models for describing effectiveness of automated advertising campaign setup suggestions on display advertisement performance, with Maximum Likelihood and Bayesian implementations, written in \textbf{R} using \textbf{lme4} and \textbf{Stan}.}
+        %\resitem{Containerized and automated Recommendation Impact pipeline using \textbf{Docker}, \textbf{odbc}, \textbf{R}, and \textbf{bash}.}
+        \resitem{Coordinated with international team to measure and report the quality and value of 24 automated display advertising performance recommendations.}
+      \end{itemize}
+    }
+  \item 
+    \ressubheading{Data Science Fellow}{Seattle, WA}{Insight Data Science}{Sept 2019 -- December 2019}
     { %normalsize%small%footnotesize
       \begin{itemize}
           \resitem{Designed Copyprism, a web application for generating draft product descriptions from an image.}
           \resitem{Implemented web scraper for collecting IKEA product descriptions in \textbf{python} using \textbf{beautifulsoup}.}
-          \resitem{Fine-tuned GPT-2 natural language deep learning model on IKEA catalog in \textbf{python} using \textbf{Google Colab}, whose generated text was indistinguishable from human text 26\% of the time.}
+          \resitem{Fine-tuned GPT-2 natural language deep learning model on IKEA catalog in \textbf{python} whose generated text indistinguishable from human text 26\% of the time.}
           \resitem{Deployed Copyprism web application on AWS using \textbf{flask}.}
       \end{itemize}
     }
@@ -137,18 +147,18 @@
     \ressubheading{Postdoctoral Scholar}{Berkeley, CA}{University of California -- Berkeley}{Sept 2017 -- July 2019}
     { %\normalsize%small%footnotesize
       \begin{itemize}
-          \resitem{Designed multilevel discrete-time survival model using \textbf{Stan} to predict species extinction which identified species at risk of extinction within 1-million years with an AUC of 0.78.}
-          \resitem{Created multievel Bayesian time series model in \textbf{Stan} for predicting when rare extinction events were likely to be clustered in time based on geological information sourced from multiple databases.}
-          \resitem{Wrote nine chapters of \href{https://psmits.github.io/paleo_book/index.html}{online book} on the analysis of paleontological and macroecological data using \textbf{R}, \textbf{tidyverse}, and \textbf{brms}.}
+          \resitem{Designed multilevel survival model using \textbf{Stan} to predict species extinction which identified species at risk of extinction within 1-million years with an AUC of 0.78.}
+          \resitem{Created multilevel Bayesian time series model in \textbf{Stan} for predicting when rare extinction events were likely to be clustered in time based on geological information across multiple databases.}
+          \resitem{Wrote nine lesson \href{https://psmits.github.io/paleo_book/index.html}{short course} on analyzing paleontological and macroecological data using \textbf{R}, \textbf{tidyverse}, and \textbf{brms}  which was used as curriculum for graduate-level paleontology course.}
       \end{itemize}
     }
   \item 
     \ressubheading{Graduate Researcher}{Chicago, IL}{University of Chicago}{Sept 2012 -- June 2017}
     { %normalsize%small%footnotesize
       \begin{itemize}
-          \resitem{Identified how differences in mammal species ecologies affected their survival rates over the last 65 million years using a multilevel Bayesian survival model implemented in \textbf{Stan} and \textbf{R} applied to a database of fossil occurrences (approx. 40k rows) accessed via web API.}
-          \resitem{Created hidden Markov birth-death model for incompletely observed longitudinal data in \textbf{Stan} where transition probabilities were modeled as multilevel regressions in order to identify how speciation and extinction rates varied over time by species ecology and environmental state.}
-          \resitem{Developed ensemble framework for identifying species based on 2D shape information using \textbf{R} and \textbf{caret} where average of multinomial logistic regression, neural network, and random forest models correctly differentiated seven closely related turtle species with an AUC over 0.98.}
+          \resitem{Identified how differences in mammal species ecologies affected their survival rates over the last 65 million years using a multilevel Bayesian survival model implemented in \textbf{Stan} and \textbf{R} applied to a database of fossil occurrences accessed via web API.}
+          \resitem{Created hidden Markov birth-death model in \textbf{Stan} for estimating fossil species observation, origination, and extinction rates over time, where each rate was modeled as its own multilevel regression which incorporated species ecology and environmental context.}
+          %\resitem{Developed ensemble framework for identifying species based on 2D shape information using \textbf{R} and \textbf{caret} where average of multinomial logistic regression, neural network, and random forest models correctly differentiated seven closely related turtle species with an AUC over 0.98.}
           \resitem{Mentored and taught graduate and undergraduate students in R, statistics, Stan, and pedagogy.}
       \end{itemize}
     }
@@ -159,7 +169,7 @@
 %%%%%%%%%%%%%%%%%%%%%%
 \resheading{Projects}
 \begin{itemize}[itemsep=-1mm]
-  \item \textbf{mathhammr:} \textbf{R} package and \href{https://psmits.shinyapps.io/dice_roller/}{\textbf{shiny} web application} for generating dice rolls for Warhammer 40k and comparing those rolls to a simulated distribution of results.
+  \item \textbf{mathhammr:} \textbf{R} package and \href{https://psmits.shinyapps.io/dice_roller/}{\textbf{shiny} web application} for generating dice rolls for Warhammer 40k 8th Edition and comparing those rolls to a simulated distribution of results.
 \end{itemize}
 
 
